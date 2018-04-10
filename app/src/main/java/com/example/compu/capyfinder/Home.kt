@@ -10,21 +10,16 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // Example of a call to a native method
-        sample_text.text = stringFromJNI()
-    }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    external fun stringFromJNI(): String
+    }//FIN ONCREATE
 
-    companion object {
+    /**    * INICIO DE ESPACIO PARA MIS FUCNIONES     */
 
-        // Used to load the 'native-lib' library on application startup.
-        init {
-            System.loadLibrary("native-lib")
-        }
+
+
+    /**    * FIN DE ESPACIO PARA MIS FUCNIONES     */
+
+    companion object {// Used to load the 'native-lib' library on application startup.
+        init {System.loadLibrary("native-lib")}
     }
 }
