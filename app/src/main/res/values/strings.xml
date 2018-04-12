@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">CapyFinder</string>
+    <string-array name="my_foods">
+        <item>Guatemala</item>
+        <item>Espana</item>
+        <item>Mexico</item>
+        <item>Honduras</item>
+        <item>Argentina</item>
+        <item>Brasil</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_k_capitales">kCapitales</string>
 </resources>

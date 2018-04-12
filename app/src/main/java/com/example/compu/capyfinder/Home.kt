@@ -24,7 +24,6 @@ class Home : AppCompatActivity(), View.OnClickListener {
         OpEsp!!.setOnClickListener(this)
 
 
-
     }//FIN ONCREATE
 
     /**    * INICIO DE ESPACIO PARA MIS FUCNIONES     */
@@ -33,15 +32,16 @@ class Home : AppCompatActivity(), View.OnClickListener {
 
     /**    * FIN DE ESPACIO PARA MIS FUCNIONES     */
     override fun onClick(v: View?) {
+
         when(v!!.id){
             R.id.Ingles -> {
                 Toast.makeText(this,"Ha Seleccionado Ingles",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Capitales::class.java)
+                val intent = Intent(this, capitales::class.java)
                 startActivity(intent)
             }
             R.id.Spanish ->{
                 Toast.makeText(this,"Ha Seleccionado Espanol",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Capitales::class.java)
+                val intent = Intent(this, kcapifinal::class.java)
                 startActivity(intent)
             }
         }
