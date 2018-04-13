@@ -5,7 +5,7 @@
         android:id="@+id/searchnuevo"
         android:icon="@drawable/ic_search_white"
         android:orderInCategory="300"
-        android:title="Search capital"
+        android:title="@string/str_searchview"
         app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"/>
+        app:showAsAction="ifRoom|collapseActionView" />
 </menu>

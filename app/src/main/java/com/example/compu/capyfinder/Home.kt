@@ -30,16 +30,20 @@ class Home : AppCompatActivity(), View.OnClickListener {
 
     /**    * FIN DE ESPACIO PARA MIS FUCNIONES     */
     override fun onClick(v: View?) {
-
+        var idioma=""
         when(v!!.id){
             R.id.Ingles -> {
                 Toast.makeText(this,"Have selected English",Toast.LENGTH_SHORT).show()
+                idioma="ingles"
                 val intent = Intent(this, ActSearch::class.java)
+                intent.putExtra("lenguage",idioma)
                 startActivity(intent)
             }
             R.id.Spanish ->{
                 Toast.makeText(this,"Ha Seleccionado Español",Toast.LENGTH_SHORT).show()
+                idioma="spain"
                 val intent = Intent(this, ActSearch::class.java)
+                intent.putExtra("lenguage",idioma)
                 startActivity(intent)
             }
         }

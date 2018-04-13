@@ -17,10 +17,12 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
 
     private List<Item> produclist;
     private Context context;
+    private String idioma;
 
-    public MainActivityAdapter(List<Item> produclist, Context context) {
+    public MainActivityAdapter(List<Item> produclist, Context context, String idioma) {
         this.produclist = produclist;
         this.context = context;
+        this.idioma = idioma;
     }
 
     @NonNull
@@ -33,17 +35,29 @@ public class MainActivityAdapter extends RecyclerView.Adapter<MainActivityAdapte
     @Override
     public void onBindViewHolder(@NonNull Holderview holder, final int position) {
 
-        holder.v_pais.setText(produclist.get(position).getCountry());
-        holder.v_capital.setText(produclist.get(position).getCapytal());
-        holder.v_image.setImageResource(produclist.get(position).getImg());
+        if (idioma.equals("ingles")) {
+            holder.v_pais.setText(produclist.get(position).getCountry());
+            holder.v_capital.setText(produclist.get(position).getCapytal());
+            holder.v_image.setImageResource(produclist.get(position).getImg());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Gentilic " + produclist.get(position).getGentilicio(),Toast.LENGTH_LONG).show();
-            }
-        });
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Gentilic " + produclist.get(position).getGentilic(),Toast.LENGTH_LONG).show();
+                }
+            });
+        }else{
+            holder.v_pais.setText(produclist.get(position).getPais());
+            holder.v_capital.setText(produclist.get(position).getCapital());
+            holder.v_image.setImageResource(produclist.get(position).getImg());
 
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "Gentilicio " + produclist.get(position).getGentilicio(),Toast.LENGTH_LONG).show();
+                }
+            });
+        }
     }
 
     @Override

@@ -99,7 +99,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/spain" />
+                    android:src="@drawable/lspain"/>
 
                 <View
                     android:layout_width="match_parent"

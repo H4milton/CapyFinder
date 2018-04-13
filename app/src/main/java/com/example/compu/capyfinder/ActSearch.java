@@ -1,8 +1,8 @@
 package com.example.compu.capyfinder;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -22,15 +22,88 @@ public class ActSearch extends AppCompatActivity {
     List<Item> productlists=new ArrayList<>();
     MainActivityAdapter adapter;
     SearchView searchView1;
+    String idioma;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_search);
+        cargardatos();
 
+        idioma = getIntent().getStringExtra("lenguage");
 
+        listshowrcy = (RecyclerView) findViewById(R.id.listshow);
+        listshowrcy.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
+        listshowrcy.setLayoutManager(linearLayoutManager);
+
+        adapter=new MainActivityAdapter(productlists,ActSearch.this,idioma);   //actSearch por MainActivity
+        listshowrcy.setAdapter(adapter);
+
+    }//FIN ON CREATE
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.searchfile, menu);
+        final MenuItem myActionMenuItem = menu.findItem(R.id.searchnuevo);
+        searchView1 = (SearchView) myActionMenuItem.getActionView();
+        changeSearchViewTextColor(searchView1);
+        ((EditText) searchView1.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(getResources().getColor(R.color.white));
+
+        searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!searchView1.isIconified()) {
+                    searchView1.setIconified(true);
+                }
+                myActionMenuItem.collapseActionView();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                final List<Item> filtermodeList=filter(productlists,newText);
+                adapter.setfilter(filtermodeList);
+                return true;
+            }
+        });
+        return true;
+    }
+
+    private List<Item> filter (List<Item> p1, String query){
+
+        query=query.toLowerCase();
+        final List<Item> filteredModeList = new ArrayList<>();
+        String text;
+        for (Item model:p1){
+            if (idioma.equals("ingles")) {
+                text = model.getCountry().toLowerCase();
+            }else{text = model.getPais().toLowerCase();}
+            if (text.startsWith(query)){
+               filteredModeList.add(model);
+            }
+        }
+        return filteredModeList;
+    }
+
+    private void changeSearchViewTextColor(View view){
+        if (view != null){
+            if (view instanceof TextView){
+                ((TextView)view).setTextColor(Color.WHITE);
+                return;
+            }else if (view instanceof ViewGroup){
+                ViewGroup viewGroup = (ViewGroup) view;
+                for (int i = 0; i < viewGroup.getChildCount(); i++){
+                    changeSearchViewTextColor(viewGroup.getChildAt(i));
+                }
+            }
+        }
+    }
+
+    private void cargardatos(){
         /*
-        * INICIO INSERTAR INFORMACION
-        * */
+         * INICIO INSERTAR INFORMACION
+         * */
         productlists.add(new Item("Afganistan","Kabul","Afgano/a",R.drawable.afghanistan,"Afghanistan","Kabul","Afghan"));
         productlists.add(new Item("Albania","Tirana","Albanes",R.drawable.albania,"Albania","Tirane","Albanian"));
         productlists.add(new Item("Argelia","Argel","Argelino/a",R.drawable.algeria,"Algeria","Argiers","Algerian"));
@@ -62,7 +135,7 @@ public class ActSearch extends AppCompatActivity {
         productlists.add(new Item("Cabo Verde","Praia","Caboverdiano",R.drawable.capeverde,"Cape Verde","Praia","Cape Verdian"));
         productlists.add(new Item("Republica Centroafricana","Bangui","Centroafricano/a",R.drawable.centralafricanrepublic,"Central African Republic","Bangui","Centralafrican"));
         productlists.add(new Item("Chad","Yamena","Chadiano/a",R.drawable.chad,"Chad","N'djamena","Chadian"));
-                productlists.add(new Item("Chile","Santiago De Chile","Chileno/a",R.drawable.chile,"Chile","Santiago","Chilean"));
+        productlists.add(new Item("Chile","Santiago De Chile","Chileno/a",R.drawable.chile,"Chile","Santiago","Chilean"));
         productlists.add(new Item("China","Pekin","Chino/a",R.drawable.china,"China","Beijing","Chinese"));
         productlists.add(new Item("Colombia","Bogota","Colombiano/a",R.drawable.colombia,"Colombia","Bogota","Colombian"));
         productlists.add(new Item("Comoras","Moroni","Comorano/a, Comorense",R.drawable.comoros,"Comoros","Moroni","Comorian"));
@@ -160,8 +233,6 @@ public class ActSearch extends AppCompatActivity {
         productlists.add(new Item("Senegal","Dakar","Senegales",R.drawable.senegal,"Senegal","Dakar","Senegalese"));
         productlists.add(new Item("Seychelles","Victoria","Seychelense",R.drawable.seychelles,"Seychelles","Victoria","Seychellois"));
         productlists.add(new Item("Sierra Leona","Freetown","Sierraleones",R.drawable.sierraleone,"Sierra Leone","Freetown","Sierra Leonian"));
-
-
         productlists.add(new Item("Singapur","Singapur","Sin Info",R.drawable.singapore,"Singapur","Singapur","Sin Info"));
         productlists.add(new Item("Tailandia","Bangkok","Sin Info",R.drawable.thailand,"Tailandia","Bangkok","Sin Info"));
         productlists.add(new Item("Dominica","Roseau","Sin Info",R.drawable.dominica,"Dominica","Roseau","Sin Info"));
@@ -172,7 +243,7 @@ public class ActSearch extends AppCompatActivity {
         productlists.add(new Item("Oman","Mascate","Sin Info",R.drawable.oman,"Oman","Mascate","Sin Info"));
         productlists.add(new Item("Banglades","Daca","Sin Info",R.drawable.bangladesh,"Banglades","Daca","Sin Info"));
         productlists.add(new Item("Emiratos Arabes Unidos","Abu Dabi","Sin Info",R.drawable.unitedarabemirates,"Emiratos Arabes Unidos","Abu Dabi","Sin Info"));
-        productlists.add(new Item("Arabia Saudita","Riad","Sin Info",R.drawable.saudiarabia,"Arabia Saudita","Riad","Sin Info"));
+        productlists.add(new Item("Arabia Saudita","Riad","Sin Info",R.drawable.saudiarabia,"Saudita Arabia","Riad","Sin Info"));
         productlists.add(new Item("Taiwan","Taipeh","Sin Info",R.drawable.taiwan,"Taiwan","Taipeh","Sin Info"));
         productlists.add(new Item("Catar","Doha","Sin Info",R.drawable.nocamera,"Catar","Doha","Sin Info"));
         productlists.add(new Item("Barein","Manama","Sin Info",R.drawable.bahrain,"Barein","Manama","Sin Info"));
@@ -234,75 +305,8 @@ public class ActSearch extends AppCompatActivity {
         productlists.add(new Item("Zambia","Lusaka","Zambiano",R.drawable.zambia,"Zambia","Lusaka","Zambian"));
         productlists.add(new Item("Zimbabue","Harare","Zimbabuense, Zimbabues, Zimbabuo/A",R.drawable.zimbabwe,"Zimbabwe","Harare","Zimbabwean"));
 
-
         /*
-        * FIN INSERTAR INFORMACION
-        * */
-
-
-        listshowrcy = (RecyclerView) findViewById(R.id.listshow);
-        listshowrcy.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
-        listshowrcy.setLayoutManager(linearLayoutManager);
-        adapter=new MainActivityAdapter(productlists,ActSearch.this);   //actSearch por MainActivity
-        listshowrcy.setAdapter(adapter);
-
-    }//FIN ON CREATE
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.searchfile, menu);
-        final MenuItem myActionMenuItem = menu.findItem(R.id.searchnuevo);
-        searchView1 = (SearchView) myActionMenuItem.getActionView();
-        changeSearchViewTextColor(searchView1);
-        ((EditText) searchView1.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(getResources().getColor(R.color.white));
-
-        searchView1.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (!searchView1.isIconified()) {
-                    searchView1.setIconified(true);
-                }
-                myActionMenuItem.collapseActionView();
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                final List<Item> filtermodeList=filter(productlists,newText);
-                adapter.setfilter(filtermodeList);
-                return true;
-            }
-        });
-        return true;
-    }
-
-    private List<Item> filter (List<Item> p1, String query){
-
-        query=query.toLowerCase();
-        final List<Item> filteredModeList = new ArrayList<>();
-        for (Item model:p1){
-
-            final String text=model.getCountry().toLowerCase();
-            if (text.startsWith(query)){
-               filteredModeList.add(model);
-            }
-        }
-        return filteredModeList;
-    }
-
-    private void changeSearchViewTextColor(View view){
-        if (view != null){
-            if (view instanceof TextView){
-                ((TextView)view).setTextColor(Color.WHITE);
-                return;
-            }else if (view instanceof ViewGroup){
-                ViewGroup viewGroup = (ViewGroup) view;
-                for (int i = 0; i < viewGroup.getChildCount(); i++){
-                    changeSearchViewTextColor(viewGroup.getChildAt(i));
-                }
-            }
-        }
+         * FIN INSERTAR INFORMACION
+         * */
     }
 }
