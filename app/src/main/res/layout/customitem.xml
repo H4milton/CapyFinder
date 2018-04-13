@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/imagennuevo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="0.75dp"
+            android:src="@drawable/nocamera"
+            android:scaleType="centerCrop"
+            android:layout_marginRight="10dp"
+
+            />
+        <TextView
+            android:id="@+id/paisnuevo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22dp"
+            android:layout_toRightOf="@id/imagennuevo"
+            android:text="Pais"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:paddingLeft="20dp"
+            android:textColor="@color/pais"
+            />
+        <TextView
+            android:id="@+id/capitalnuevo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Capital"
+            android:textSize="15dp"
+            android:layout_toRightOf="@id/imagennuevo"
+            android:textColor="@color/capital"
+            android:paddingLeft="20dp"
+            android:layout_below="@id/paisnuevo"
+            />
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".capitales" />
         <activity android:name=".kCapitales" />
-        <activity android:name=".kcapifinal"></activity>
+        <activity android:name=".kcapifinal" />
+        <activity android:name=".ActSearch"></activity>
     </application>
 
 </manifest>

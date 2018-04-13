@@ -9,7 +9,6 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_home.*
 
 class Home : AppCompatActivity(), View.OnClickListener {
-
     private var OpIng : CardView? = null
     private var OpEsp : CardView? = null
 
@@ -23,7 +22,6 @@ class Home : AppCompatActivity(), View.OnClickListener {
         OpIng!!.setOnClickListener(this)
         OpEsp!!.setOnClickListener(this)
 
-
     }//FIN ONCREATE
 
     /**    * INICIO DE ESPACIO PARA MIS FUCNIONES     */
@@ -35,13 +33,13 @@ class Home : AppCompatActivity(), View.OnClickListener {
 
         when(v!!.id){
             R.id.Ingles -> {
-                Toast.makeText(this,"Ha Seleccionado Ingles",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, capitales::class.java)
+                Toast.makeText(this,"Have selected English",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, ActSearch::class.java)
                 startActivity(intent)
             }
             R.id.Spanish ->{
-                Toast.makeText(this,"Ha Seleccionado Espanol",Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, kcapifinal::class.java)
+                Toast.makeText(this,"Ha Seleccionado Español",Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, ActSearch::class.java)
                 startActivity(intent)
             }
         }
